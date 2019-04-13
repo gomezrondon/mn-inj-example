@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+group 'Java-exe-jar'
+version ''
+
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+dependencies {
+    annotationProcessor "io.micronaut:micronaut-inject-java:1.0.4"
+    compile   'io.micronaut:micronaut-inject:1.0.4' 
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar{
+    from {configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }}
+    manifest{
+        attributes 'Main-Class':'Main'
+    }
+}
